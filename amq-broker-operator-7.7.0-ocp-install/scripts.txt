@@ -1,0 +1,85 @@
+mkdir -p ~/broker/operator
+mv Downloads/AMQ/amq-broker-operator-7.7.0-ocp-install-examples.zip broker/operator/
+cd ~/broker/operator
+unzip amq-broker-operator-7.7.0-ocp-install-examples.zip
+cd amq-broker-operator-7.7.0-ocp-install-examples/deploy
+oc project amq-demo
+oc create -f deploy/service_account.yaml
+oc create -f deploy/role.yaml
+oc create -f deploy/role_binding.yaml
+oc create -f deploy/crds/broker_activemqartemis_crd.yaml
+
+oc delete -f deploy/crds/broker_v1alpha1_activemqartemis_crd.yaml
+oc delete -f deploy/crds/broker_v1alpha1_activemqartemisaddress_crd.yaml
+oc delete -f deploy/crds/broker_v1alpha1_activemqartemisscaledown_crd.yaml
+oc create -f deploy/crds/broker_activemqartemis_crd.yaml
+oc create -f deploy/crds/broker_activemqartemisaddress_crd.yaml
+oc create -f deploy/crds/broker_activemqartemisscaledown_crd.yaml
+podman login -u <<USERNAME>> -p <<PASSWORD>> https://registry.redhat.io
+oc secrets link --for=pull default <<USERNAME>>
+oc create -f deploy/operator.yaml
+$ oc create -f deploy/crs/broker_activemqartemis_cr.yaml
+
+
+oc delete -f deploy/crs/broker_activemqartemis_cr.yaml
+
+$keytool -genkey -keyalg RSA -alias broker -keystore certs/broker.ks -storepass 123456 -validity 9999 -dname "CN=ex-aao-mqtt-*-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com, OU=EMEA Partner Development, O=Red Hat, L=Milan, ST=Milan, C=IT" -ext "SAN=DNS:ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com,DNS:ex-aao-mqtt-1-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com"
+
+$keytool -export -alias broker -keystore certs/broker.ks -file broker_cert.pem -storepass 123456
+$keytool -import -alias broker -keystore certs/client.ts -file broker_cert.pem -storepass 123456
+
+oc delete secret amq-tls-secret
+oc create secret generic amq-tls-secret \
+--from-file=broker.ks=certs/broker.ks \
+--from-file=client.ts=certs/broker.ks \
+--from-literal=keyStorePassword=123456 \
+--from-literal=trustStorePassword=123456
+oc secrets link sa/amq-broker-operator secret/amq-tls-secret
+
+oc create -f deploy/crs/broker_activemqartemis_cr.yaml
+
+curl https://ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+oc delete -f deploy/crs/broker_activemqartemis_cr.yaml
+
+keytool -genkey -keyalg RSA -alias root -keystore certs/broker.ks -storepass 123456 -validity 9999 -dname "CN=ex-aao-mqtt-*-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com, OU=EMEA Partner Development, O=Red Hat, L=Milan, ST=Milan, C=IT" -ext "SAN=DNS:ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com,DNS:ex-aao-mqtt-1-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com"
+
+keytool -export -alias root -keystore certs/broker.ks -file certs/broker_cert.pem -storepass 123456
+keytool -import -alias root -keystore certs/client.ts -file certs/broker_cert.pem -storepass 123456
+
+oc delete secret amq-tls-secret
+oc create secret generic amq-tls-secret \
+--from-file=broker.ks=certs/broker.ks \
+--from-file=client.ts=certs/broker.ks \
+--from-literal=keyStorePassword=123456 \
+--from-literal=trustStorePassword=123456
+oc secrets link sa/amq-broker-operator secret/amq-tls-secret
+
+oc create -f deploy/crs/broker_activemqartemis_cr.yaml
+
+mkdir -p /tmp/qiot/cert
+cp certs/client.ts /tmp/qiot/cert/
