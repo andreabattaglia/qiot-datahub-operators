@@ -18,9 +18,6 @@ oc create -f deploy/crds/broker_activemqartemisscaledown_crd.yaml
 podman login -u <<USERNAME>> -p <<PASSWORD>> https://registry.redhat.io
 oc secrets link --for=pull default <<USERNAME>>
 oc create -f deploy/operator.yaml
-$ oc create -f deploy/crs/broker_activemqartemis_cr.yaml
-
-
 oc delete -f deploy/crs/broker_activemqartemis_cr.yaml
 
 $keytool -genkey -keyalg RSA -alias broker -keystore certs/broker.ks -storepass 123456 -validity 9999 -dname "CN=ex-aao-mqtt-*-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com, OU=EMEA Partner Development, O=Red Hat, L=Milan, ST=Milan, C=IT" -ext "SAN=DNS:ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com,DNS:ex-aao-mqtt-1-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com"
