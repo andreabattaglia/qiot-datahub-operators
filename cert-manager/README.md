@@ -99,7 +99,7 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     export KEYS=BwM/CVRTq0cgYvkZdyqV98uHkxWkTO+eGWO1jZAnTbw=
     export VAULT_TOKEN=s.a5qNdR8daXNuai6g8tboAV6O
 
-    sh covin19/setup.sh covid19-dev
+    sh covid19/setup.sh covid19-dev
     sh covid19/setup.sh covid19-int
     sh covid19/setup.sh covid19-prod
     
@@ -121,7 +121,7 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     helm upgrade --install vault helm-charts/covid19-issuer -n covid19-int --set issuer.create=true
     helm upgrade --install vault helm-charts/covid19-issuer -n covid19-prod --set issuer.create=true
     ```
-    
+
 4. Verify Dummy Certificate Secret is created
 
     ```

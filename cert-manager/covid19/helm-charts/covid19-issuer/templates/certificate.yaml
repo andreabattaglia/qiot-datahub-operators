@@ -1,0 +1,15 @@
+{{- if .Values.issuer.create -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "covid19-issuer.fullname" . }}-dummy
+  labels:
+    {{- include "covid19-issuer.labels" . | nindent 4 }}
+spec:
+  commonName: dummy.{{ .Release.Namespace }}.qiot-project.io
+  dnsNames:
+    - dummy.{{ .Release.Namespace }}.qiot-project.io
+  secretName: {{ include "covid19-issuer.fullname" . }}-dummy-cert
+  issuerRef:
+    name: {{ include "covid19-issuer.fullname" . }}-vault
+{{- end }}
