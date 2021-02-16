@@ -24,7 +24,6 @@ spec:
       enabledProtocols: TLSv1,TLSv1.1,TLSv1.2
       needClientAuth: false
       wantClientAuth: false
-      verifyHost: true
       sslProvider: JDK
       expose: true
       anycastPrefix: jms.queue.
