@@ -19,18 +19,18 @@
   oc project amq-demo
 
   # Prepare for Operator Execution:
-  oc create -f service_account.yaml
-  oc create -f role.yaml
-  oc create -f role_binding.yaml
+  oc create -f deploy/service_account.yaml
+  oc create -f deploy/role.yaml
+  oc create -f deploy/role_binding.yaml
 
   # Deploy the main broker CRD:
-  oc create -f crds/broker_activemqartemis_crd.yaml
+  oc create -f deploy/crds/broker_activemqartemis_crd.yaml
 
   # Deploy the address CRD:
-  oc create -f crds/broker_activemqartemisaddress_crd.yaml
+  oc create -f deploy/crds/broker_activemqartemisaddress_crd.yaml
 
   # Deploy the scaledown controller CRD:
-  oc create -f crds/broker_activemqartemisscaledown_crd.yaml
+  oc create -f deploy/crds/broker_activemqartemisscaledown_crd.yaml
 
   # Login to registry and pass the credential to oc
   # https://access.redhat.com/RegistryAuthentication
@@ -40,24 +40,24 @@
   oc secrets link --for=pull deployer pull-secret-from-redhat
   oc secrets link --for=pull builder pull-secret-from-redhat
 
-  oc create -f operator.yaml
+  oc create -f deploy/operator.yaml
 
-## Create the certificate (Or use the provided ones, skipping down oc create secret generic amq-tls-secret...)
+## Create the certificate (Or use the provided ones, skipping down oc create secret generic endpoint-service-tls-secret...)
 
   $ keytool -genkey -keyalg RSA -alias broker -keystore ../certs/broker.ks -storepass 123456 -validity 9999 -dname "CN=ex-aao-mqtt-*-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com, OU=EMEA Partner Development, O=Red Hat, L=Milan, ST=Milan, C=IT" -ext "SAN=DNS:ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com,DNS:ex-aao-mqtt-1-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com"
   $ keytool -export -alias broker -keystore ../certs/broker.ks -file ../certs/broker_cert.pem -storepass 123456
   $ keytool -import -alias broker -keystore ../certs/client.ts -file ../certs/broker_cert.pem -storepass 123456
 
-  oc create secret generic amq-tls-secret \
-  --from-file=broker.ks=../certs/broker.ks \
-  --from-file=client.ts=../certs/broker.ks \
+  oc create secret generic endpoint-service-tls-secret \
+  --from-file=broker.ks=certs/broker.ks \
+  --from-file=client.ts=certs/broker.ks \
   --from-literal=keyStorePassword=123456 \
   --from-literal=trustStorePassword=123456
-  oc secrets link sa/amq-broker-operator secret/amq-tls-secret
+  oc secrets link sa/amq-broker-operator secret/endpoint-service-tls-secret
 
 ## Install the AMQ Broker using the Operator just installed
 
-oc create -f crs/broker_activemqartemis_cr.yaml
+oc create -f deploy/crs/broker_activemqartemis_cr.yaml
 
 curl https://ex-aao-mqtt-0-svc-rte-amq-demo.apps.cluster-emeaiot-d864.emeaiot-d864.example.opentlc.com/
 
