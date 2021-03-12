@@ -19,10 +19,10 @@
 3. Launch the helm installation
 
     ```bash
-    helm install \
+    helm upgrade --install \
         cert-manager jetstack/cert-manager \
         --namespace cert-manager \
-        --version v1.1.0 \
+        --version v1.2.0 \
         --set installCRDs=true
     ```
 4. Test the installation
@@ -95,7 +95,7 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     >
 
     ```
-    export VAULT_ADDR=https://$(oc get route vault --no-headers -o custom-columns=HOST:.spec.host)
+    export VAULT_ADDR=https://$(oc get route vault --no-headers -o custom-columns=HOST:.spec.host -n hashicorp)
     export KEYS=BwM/CVRTq0cgYvkZdyqV98uHkxWkTO+eGWO1jZAnTbw=
     export VAULT_TOKEN=s.a5qNdR8daXNuai6g8tboAV6O
 
