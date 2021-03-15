@@ -34,11 +34,11 @@ echo "https://127.0.0.1:8200/v1/${PKI}/crl"
 echo "Configure Role for domain: ${DOMAIN}"
 
 vault write -tls-skip-verify ${PKI}/roles/qiot-project-io \
-    allowed_domains=${DOMAIN},svc \
+    allowed_domains=${DOMAIN},${PROJECT}.svc \
     allow_subdomains=true \
     allowed_other_sans="*" \
     allow_glob_domains=true \
-    max_ttl=72h
+    max_ttl=365d
 
 echo "Create PKI Policy pki-${ROLE}-policy"
 

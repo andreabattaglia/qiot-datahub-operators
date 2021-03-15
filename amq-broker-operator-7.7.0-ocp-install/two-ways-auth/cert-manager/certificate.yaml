@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: endpoint-service-mqtts
+spec:
+  commonName: endpoint-service-mqtts-0-svc.qiotcovid19v2.svc
+  dnsNames:
+    - endpoint-service-mqtts-0-svc.qiotcovid19v2.svc
+    - endpoint-service-mqtts-1-svc.qiotcovid19v2.svc
+    - endpoint-service-mqtts-0-svc-rte.qiotcovid19v2.qiot-project.io
+    - endpoint-service-mqtts-1-svc-rte.qiotcovid19v2.qiot-project.io
+    - endpoint-service-mqtts-0-svc-rte-qiotcovid19v2.apps.cluster-fcd8.fcd8.example.opentlc.com
+    - endpoint-service-mqtts-1-svc-rte-qiotcovid19v2.apps.cluster-fcd8.fcd8.example.opentlc.com
+  issuerRef:
+    name: vault-covid19-issuer-vault
+  keystores:
+    jks:
+      create: true
+      passwordSecretRef:
+        key: password
+        name: keystore-secret-endpoint-service-mqtts
+  secretName: endpoint-service-mqtts-secret

@@ -70,6 +70,7 @@ oc delete -f deploy/crds/broker_activemqartemisscaledown_crd.yaml
 # 6. Create a broker trust store that imports the client certificate
   $ keytool -import -alias broker -keystore certs/broker.ts -file certs/client_cert.pem -storepass 123456 -trustcacerts
 
+# 7. Create AMQ Broker TLS Secret
 
   oc create secret generic endpoint-service-tls-secret \
   --from-file=broker.ks=certs/broker.ks \
@@ -77,6 +78,29 @@ oc delete -f deploy/crds/broker_activemqartemisscaledown_crd.yaml
   --from-literal=keyStorePassword=123456 \
   --from-literal=trustStorePassword=123456
   oc secrets link sa/amq-broker-operator secret/endpoint-service-tls-secret
+
+## Cert Manager Integration
+
+1. Create Certificate and Secret.
+  
+  `oc apply -f cert-manager/`  
+
+
+2. Extract Secret
+
+  `oc extract secret/endpoint-service-mqtts-secret` 
+
+
+3. Create AMQ Broker TLS Secret convention.
+
+  oc create secret generic endpoint-service-tls-secret \
+  --from-file=broker.ks=keystore.jks \
+  --from-file=client.ts=truststore.jks \
+  --from-literal=keyStorePassword=123456 \
+  --from-literal=trustStorePassword=123456
+  oc secrets link sa/amq-broker-operator secret/endpoint-service-tls-secret
+
+
 
 ## Install the AMQ Broker using the Operator just installed
 

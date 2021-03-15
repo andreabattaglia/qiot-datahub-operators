@@ -22,8 +22,7 @@ spec:
       sslSecret: endpoint-service-tls-secret
       enabledCipherSuites: TLS_RSA_WITH_AES_256_CBC_SHA
       enabledProtocols: TLSv1,TLSv1.1,TLSv1.2
-      needClientAuth: false
-      wantClientAuth: false
+      needClientAuth: true
       sslProvider: JDK
       expose: true
       anycastPrefix: jms.queue.
