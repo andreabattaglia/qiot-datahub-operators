@@ -99,9 +99,9 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     export KEYS=BwM/CVRTq0cgYvkZdyqV98uHkxWkTO+eGWO1jZAnTbw=
     export VAULT_TOKEN=s.a5qNdR8daXNuai6g8tboAV6O
 
-    sh covid19/setup.sh covid19-dev
-    sh covid19/setup.sh covid19-int
-    sh covid19/setup.sh covid19-prod
+    sh covid19/setup.sh covid19-dev apps.cluster-fcd8.fcd8.example.opentlc.com
+    sh covid19/setup.sh covid19-int apps.cluster-fcd8.fcd8.example.opentlc.com
+    sh covid19/setup.sh covid19-prod apps.cluster-fcd8.fcd8.example.opentlc.com
     
     ```
 2. Configure covid19-{dev,int,prod} project.
