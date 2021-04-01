@@ -9,6 +9,7 @@ export PKI=${PROJECT}-pki
 export DOMAIN=${PROJECT}.qiot-project.io
 export ROLE=${PROJECT}-qiot-project-io
 export SERVICE_ACCOUNT=issuer
+export WILDCARD_DOMAIN=$2
 
 echo "Setup on ${PROJECT}"
 
@@ -25,20 +26,21 @@ vault write -tls-skip-verify ${PKI}/root/generate/internal \
 echo "CRL Configuration"
 
 vault write -tls-skip-verify ${PKI}/config/urls \
-    issuing_certificates="https://127.0.0.1:8200/v1/${PKI}/ca" \
-    crl_distribution_points="https://127.0.0.1:8200/v1/${PKI}/crl"
+    issuing_certificates="$VAULT_ADDR/v1/${PKI}/ca" \
+    crl_distribution_points="$VAULT_ADDR/v1/${PKI}/crl"
 
-echo "https://127.0.0.1:8200/v1/${PKI}/ca"
-echo "https://127.0.0.1:8200/v1/${PKI}/crl"
+echo "$VAULT_ADDR/v1/${PKI}/ca"
+echo "$VAULT_ADDR/v1/${PKI}/crl"
 
 echo "Configure Role for domain: ${DOMAIN}"
 
 vault write -tls-skip-verify ${PKI}/roles/qiot-project-io \
-    allowed_domains=${DOMAIN},${PROJECT}.svc \
+    allowed_domains=${DOMAIN},${PROJECT}.svc,${WILDCARD_DOMAIN} \
     allow_subdomains=true \
     allowed_other_sans="*" \
     allow_glob_domains=true \
-    max_ttl=365d
+    allowed_uri_sans=*-${PROJECT}.${WILDCARD_DOMAIN} \
+    max_ttl="31536000"
 
 echo "Create PKI Policy pki-${ROLE}-policy"
 
