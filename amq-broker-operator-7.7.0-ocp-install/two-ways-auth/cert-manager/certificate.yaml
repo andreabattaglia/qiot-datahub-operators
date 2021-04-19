@@ -9,8 +9,8 @@ spec:
     - endpoint-service-mqtts-1-svc.qiotcovid19v2.svc
     - endpoint-service-mqtts-0-svc-rte.qiotcovid19v2.qiot-project.io
     - endpoint-service-mqtts-1-svc-rte.qiotcovid19v2.qiot-project.io
-    - endpoint-service-mqtts-0-svc-rte-qiotcovid19v2.apps.cluster-fcd8.fcd8.example.opentlc.com
-    - endpoint-service-mqtts-1-svc-rte-qiotcovid19v2.apps.cluster-fcd8.fcd8.example.opentlc.com
+    - endpoint-service-mqtts-0-svc-rte-qiotcovid19v2.apps.cluster-cf04.cf04.sandbox37.opentlc.com
+    - endpoint-service-mqtts-1-svc-rte-qiotcovid19v2.apps.cluster-cf04.cf04.sandbox37.opentlc.com
   issuerRef:
     name: vault-covid19-issuer-vault
   keystores:
