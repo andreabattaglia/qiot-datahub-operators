@@ -48,9 +48,15 @@ spec:
             -r {{ .Values.adminUser.retention_policy }} \
             -p ${INFLUXDB_PASSWORD} \
             -t ${INFLUXDB_TOKEN}
+        volumeMounts:
+        - name: config
+          mountPath: /etc/influxdb2
       restartPolicy: OnFailure
       {{- if .Values.securityContext.runAsGroup }}
       securityContext:
         fsGroup: {{ .Values.securityContext.runAsGroup }}
       {{- end }}
+      volumes:
+      - name: config
+        emptyDir: {}
 {{- end -}}
