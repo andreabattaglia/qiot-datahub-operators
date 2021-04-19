@@ -99,9 +99,10 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     export KEYS=BwM/CVRTq0cgYvkZdyqV98uHkxWkTO+eGWO1jZAnTbw=
     export VAULT_TOKEN=s.a5qNdR8daXNuai6g8tboAV6O
 
-    sh covid19/setup.sh covid19-dev apps.cluster-fcd8.fcd8.example.opentlc.com
-    sh covid19/setup.sh covid19-int apps.cluster-fcd8.fcd8.example.opentlc.com
-    sh covid19/setup.sh covid19-prod apps.cluster-fcd8.fcd8.example.opentlc.com
+    sh covid19/setup.sh covid19-dev apps.cluster-cf04.cf04.sandbox37.opentlc.com
+    sh covid19/setup.sh covid19-int apps.cluster-cf04.cf04.sandbox37.opentlc.com
+    sh covid19/setup.sh covid19-prod apps.cluster-cf04.cf04.sandbox37.opentlc.com
+    sh covid19/setup.sh qiotcovid19v2 apps.cluster-cf04.cf04.sandbox37.opentlc.com
     
     ```
 2. Configure covid19-{dev,int,prod} project.
@@ -111,6 +112,7 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
    helm upgrade --install vault helm-charts/covid19-issuer -n covid19-dev
    helm upgrade --install vault helm-charts/covid19-issuer -n covid19-int 
    helm upgrade --install vault helm-charts/covid19-issuer -n covid19-prod
+   helm upgrade --install vault helm-charts/covid19-issuer -n qiotcovid19v2
 
    ```
  
@@ -120,7 +122,8 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     helm upgrade --install vault helm-charts/covid19-issuer -n covid19-dev --set issuer.create=true
     helm upgrade --install vault helm-charts/covid19-issuer -n covid19-int --set issuer.create=true
     helm upgrade --install vault helm-charts/covid19-issuer -n covid19-prod --set issuer.create=true
-    ```
+    helm upgrade --install vault helm-charts/covid19-issuer -n qiotcovid19v2 --set issuer.create=true
+    ```read
 
 4. Verify Dummy Certificate Secret is created
 
@@ -128,6 +131,7 @@ COVID-19 Projects leverage Vault PKI Infrastructure.
     oc get secret vault-covid19-issuer-dummy-cert -n covid19-dev
     oc get secret vault-covid19-issuer-dummy-cert -n covid19-int
     oc get secret vault-covid19-issuer-dummy-cert -n covid19-prod
+    oc get secret vault-covid19-issuer-dummy-cert -n qiotcovid19v2
     ```
 
 
