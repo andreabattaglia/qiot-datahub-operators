@@ -1,0 +1,15 @@
+# Default values for qiot-pipelines
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+settings:
+    serviceName: postgresql
+    memoryLimit: 6Gi
+    volumeCapacity: 20Gi
+    imagestream: openshift
+
+database:
+    name: qiot
+    user: qiot
+    password: qiot
+    version: 10-el8

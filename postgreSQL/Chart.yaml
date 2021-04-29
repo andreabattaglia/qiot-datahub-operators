@@ -1,0 +1,11 @@
+apiVersion: v2
+name: qiot-covid19-datahub-postgresql
+description: Installation of the postgreSQL server into the corresponding project together with a Secret
+home: https://github.com/qiot-project
+type: application
+version: 1.0.0
+appVersion: "10-el8"
+maintainers:
+    - name: Wanja Pernath
+      email: wpernath@redhat.com
+      
