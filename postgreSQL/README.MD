@@ -7,4 +7,6 @@ $> helm package ./postgreSQL -u
 $> helm install qiot-covid19-datahub-postgresql qiot-covid19-datahub-postgresql-1.0.0.tgz
 ```
 
+## changing defaults
+All variables are in values.yaml
 
