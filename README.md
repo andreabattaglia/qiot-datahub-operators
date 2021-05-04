@@ -9,6 +9,8 @@ Operators and Helm Charts used by QIoT DataHub
 |PostgreSQL     |[README.md](./postgreSQL/README.md)        |
 |InfluxDB       |[README.md](./influxdb2/README.md)         |
 |Grafana        |[README.md](./Grafana/README.md)           |
+|AMQ Broker     |[README.md](./Grafana/README.md)           |
+
 
 ## Installation
 Please install the Operators and Helm Charts in the order of the table above.

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: qiot-covid19-datahub-grafana
+description: Installation of the Grafana service into the corresponding project together with everything required
+home: https://github.com/qiot-project
+type: application
+version: 1.0.0
+appVersion: "3.10.0"
+maintainers:
+    - name: Wanja Pernath
+      email: wpernath@redhat.com
+      

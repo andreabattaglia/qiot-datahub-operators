@@ -1,0 +1,9 @@
+# Default values for qiot project
+settings:
+    namespace: qiotcovid19v2
+    adminPassword: qiotcovid19
+
+datasource:
+    influxdbtoken: hBta3AUlJMCb7y4qpG4o1LNGR6CQpbgJi88NYMX2ta8zj5Xi_EBIezhgtPcYNTXhnbKfgcpUbHDgnArIEKxFxA==    
+    defaultBucket: covid19
+    organization: qiot
