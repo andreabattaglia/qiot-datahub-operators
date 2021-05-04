@@ -1,6 +1,6 @@
 # Grafana Operator Custom Resources
 
-This deploy requires the Grafana Operator >=3.9 with grafana >=7.1 which comes fith Flux integration required for InfluxDB 2.0.
+This deploy requires the Grafana Operator >=3.9 with grafana >=7.1 which comes with Flux integration required for InfluxDB 2.0.
 
 ## Objects
 
