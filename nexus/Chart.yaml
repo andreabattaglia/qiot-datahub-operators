@@ -1,0 +1,11 @@
+apiVersion: v2
+name: qiot-covid19-datahub-nexus
+description: Installation of Nexus service into the corresponding project together
+home: https://github.com/qiot-project
+type: application
+version: 1.0.0
+appVersion: "3.16.2"
+maintainers:
+  - name: Wanja Pernath
+    email: wpernath@redhat.com
+
