@@ -5,7 +5,7 @@ global:
 server:
   route:
     enabled: true
-    host: vault.apps.cluster-cf04.cf04.sandbox37.opentlc.com
+    #host: vault.apps.cluster-cf04.cf04.sandbox37.opentlc.com
   standalone:
     enabled: true
     config: |
