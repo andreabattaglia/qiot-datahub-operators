@@ -9,3 +9,4 @@ serviceAccount:
 
 issuer:
   create: false
+  server: https://vault-internal.hashicorp.svc.cluster.local:8200
