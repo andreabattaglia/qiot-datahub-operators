@@ -3,7 +3,10 @@
 if [ "$#" -ne 1 ]; then
     echo "Missing Projects"
 fi
-
+echo "----- inside setup.sh ------------------"
+echo "KEYS       = $KEYS"
+echo "VAULT_ADDR = $VAULT_ADDR"
+echo "----- inside setup.sh ------------------"
 export PROJECT=$1
 export PKI=${PROJECT}-pki
 export DOMAIN=${PROJECT}.qiot-project.io
